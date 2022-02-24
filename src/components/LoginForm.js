@@ -7,12 +7,14 @@ const LoginForm = ({setUser, setErrorMessage}) => {
 
   const handleLogin = async (event) => {
     event.preventDefault()
-    console.log(`loggin in with ${username}, ${password}`)
 
     try {
       const user = await loginService.login({
         username, password
       })
+
+      window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user))
+      
       setUser(user)
       setUsername('')
       setPassword('')
