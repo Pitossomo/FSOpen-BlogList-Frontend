@@ -1,32 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
+import blogsServices from "../services/blogs";
 
-const handleNewBlog = () => {
-  console.log('TODO - submit new blog')
+const BlogForm = () => {
+  const [title, setTitle] = useState('')
+  const [author, setAuthor] = useState('')
+  const [url, setUrl] = useState('')
+
+  const handleNewBlog = () => {
+    const newBlog = {
+      title: title,
+      author: author,
+      url: url
+    }
+    
+    blogsServices.create(newBlog)
+
+    setTitle('')
+    setAuthor('')
+    setUrl('')
+  }
+
+  return (
+    <div>
+      <h2>Add new blog</h2>
+      <form onSubmit={handleNewBlog}>
+        
+        <div>
+          <label>title</label>
+          <input 
+            type='text' name='title'
+            value={title}
+            onChange={({target}) => setTitle(target.value)}        
+          />
+        </div>
+
+        <div>
+          <label>author</label>
+          <input
+            type='text' name='author'
+            value={author}
+            onChange={({target}) => setAuthor(target.value)}        
+          />
+          
+        </div>
+
+        <div>
+          <label>url</label>
+          <input 
+            type='text' name='url'
+            value={url}
+            onChange={({target}) => setUrl(target.value)}        
+          />
+        </div>
+
+        <button type='submit'>Add</button>
+      </form>
+    </div>
+  )
 }
-
-const BlogForm = () => (
-  <div>
-    <h2>Add new blog</h2>
-    <form onSubmit={handleNewBlog}>
-      
-      <div>
-        <label>title</label>
-        <input type='text' name='title'/>
-      </div>
-
-      <div>
-        <label>author</label>
-        <input type='text' name='author'/>
-      </div>
-
-      <div>
-        <label>url</label>
-        <input type='text' name='url'/>
-      </div>
-
-      <button type='submit'>Add</button>
-    </form>
-  </div>
-)
 
 export default BlogForm

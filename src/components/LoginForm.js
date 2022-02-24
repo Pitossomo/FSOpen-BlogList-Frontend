@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import blogsService from "../services/blogs"
 import loginService from '../services/login'
 
 const LoginForm = ({setUser, setErrorMessage}) => {
@@ -15,6 +16,7 @@ const LoginForm = ({setUser, setErrorMessage}) => {
 
       window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user))
       
+      blogsService.setToken(user.token)
       setUser(user)
       setUsername('')
       setPassword('')
