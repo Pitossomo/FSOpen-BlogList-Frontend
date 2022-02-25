@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import ErrorMessages from './components/ErrorMessages'
+import Alerts from './components/Alerts'
 import Blogs from './components/Blogs'
 import LoginForm from './components/LoginForm'
 import BlogForm from './components/BlogForm'
@@ -9,7 +9,26 @@ import blogService from './services/blogs'
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
-  const [errorMessages, setErrorMessages] = useState([])
+  const [messages, setMessages] = useState(
+    {
+      ERROR: [],
+      SUCCESS: []
+    }
+  )
+
+  const addMessage = (newMsg, type) => {
+    const newMessages = { ...messages }
+    newMessages[type] = messages[type].concat(newMsg)
+
+    setMessages(newMessages)
+    
+    setTimeout(() => {
+      setMessages({
+        ERROR: [],
+        SUCCESS: []
+      })
+    }, 5000)
+  }
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
@@ -22,7 +41,7 @@ const App = () => {
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
-      setBlogs( blogs )
+      setBlogs(blogs)
     )  
   }, []) 
 
@@ -32,11 +51,11 @@ const App = () => {
 
       <Greetings user={user} setUser={setUser} />
 
-      <ErrorMessages errorMessages={errorMessages} />
+      <Alerts messages={messages} />
       
       { user === null
-        ? <LoginForm setUser={setUser} setErrorMessages={setErrorMessages} />
-        : <BlogForm />
+        ? <LoginForm setUser={setUser} addMessage={addMessage} />
+        : <BlogForm addMessage={addMessage} />
       }
 
       <Blogs blogs={blogs} />
