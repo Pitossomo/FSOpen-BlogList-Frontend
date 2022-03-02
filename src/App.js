@@ -61,7 +61,7 @@ const App = () => {
           </Toggable>
       }
 
-      <Blogs blogs={blogs} setBlogs={setBlogs} />
+      <Blogs blogs={blogs} setBlogs={setBlogs} user={user} addMessage={addMessage} />
     </div>
   )
 }

@@ -22,8 +22,6 @@ const BlogForm = ({addMessage, setBlogs, blogs}) => {
         setUrl('')   
       }
     )
-
-     
   }
 
   return (
