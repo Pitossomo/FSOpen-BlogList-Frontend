@@ -16,7 +16,7 @@ const Blog = ({blog, setBlogs, blogs}) => {
         : b
     })
 
-    setBlogs(blogsUpdated)
+    setBlogs(blogsUpdated.sort((a,b) => b.likes - a.likes))
   }
 
   const blogStyle = {
@@ -31,7 +31,9 @@ const Blog = ({blog, setBlogs, blogs}) => {
     <div style={blogStyle}>
       <div>
         {blog.title} {blog.author} 
-        <button onClick={toggleDetails}>view</button>
+        <button onClick={toggleDetails}>
+          {showDetails ? "hide" : "show"}
+        </button>
         <button onClick={like}>like</button>
         <div style={detailsStyle} >
           <p>{blog.url}</p>
