@@ -16,7 +16,11 @@ const Blog = ({blog, setBlogs, blogs}) => {
         : b
     })
 
-    setBlogs(blogsUpdated.sort((a,b) => b.likes - a.likes))
+    setBlogs(blogsUpdated)
+    
+    // REMOVED sorting when liking a blog 
+    // setBlogs(blogsUpdated.sort((a,b) => b.likes - a.likes))
+
   }
 
   const blogStyle = {
