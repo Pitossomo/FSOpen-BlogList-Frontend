@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import blogsServices from "../services/blogs";
 
-const BlogForm = () => {
+const BlogForm = ({addMessage, setBlogs, blogs}) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
@@ -13,11 +13,17 @@ const BlogForm = () => {
       url: url
     }
     
-    blogsServices.create(newBlog)
+    blogsServices
+      .create(newBlog)
+      .then(returnedBlog => {
+        setBlogs(blogs.concat(returnedBlog))
+        setTitle('')
+        setAuthor('')
+        setUrl('')   
+      }
+    )
 
-    setTitle('')
-    setAuthor('')
-    setUrl('')
+     
   }
 
   return (

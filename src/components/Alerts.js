@@ -26,7 +26,6 @@ const SuccessMsg = ({text}) => <li>{text}</li>
 const ErrorMsg = ({text}) => <li>{text}</li>
 
 const Alerts = ({messages}) => {
-  console.log(messages)
   return (
     <div>
       { messages.SUCCESS.length > 0 ?

@@ -20,8 +20,21 @@ const create = async newObject => {
 
   const response = await axios.post(baseUrl, newObject, config)
 
-  console.log(response.data)
   return response.data
 }
 
-export default { setToken, getAll, create }
+const like = async blog => {
+  const blogUpdated = { 
+    user: blog.user.id,
+    author: blog.author,
+    title: blog.title,
+    url: blog.url,
+    likes: blog['likes'] + 1
+  }
+
+  const response = await axios.put(`${baseUrl}/${blog.id}`, blogUpdated)
+
+  return response.data
+}
+
+export default { setToken, getAll, create, like }
