@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Alerts from './components/Alerts'
-import Blogs from './components/Blogs'
+import Blogs from './components/Blogs/Blogs'
 import LoginForm from './components/LoginForm'
 import BlogForm from './components/BlogForm'
 import Greetings from './components/Greetings'

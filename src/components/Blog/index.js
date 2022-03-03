@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import blogsService from '../services/blogs'
+import blogsService from '../../services/blogs'
 
 const Blog = ({ blog, setBlogs, blogs, user }) => {
   const [showDetails, setShowDetails] = useState(false)
@@ -42,7 +42,8 @@ const Blog = ({ blog, setBlogs, blogs, user }) => {
   return (
     <div style={blogStyle}>
       <div>
-        {blog.title} {blog.author}
+        <span>{blog.title}</span>
+        <span>{blog.author}</span>
         <button onClick={toggleDetails}>
           {showDetails ? 'hide' : 'show'}
         </button>
