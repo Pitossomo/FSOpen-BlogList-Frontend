@@ -1,6 +1,7 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import Blog from '.'
 
 describe('<Blog /> component', () => {
@@ -20,7 +21,7 @@ describe('<Blog /> component', () => {
   let container
 
   beforeEach(() => {
-    container = render(<Blog blog={blog}/>)
+    container = render(<Blog blog={blog} blogs={[blog]} setBlogs={() => {}} />).container
   })
 
   test('render title and author, but not url and num of likes by default', () => {
@@ -35,6 +36,15 @@ describe('<Blog /> component', () => {
     expect(likes).not.toBeVisible()
   })
 
-  test.todo('render url and num of likes when "show details" button is clicked once'), () => {}
-  test.todo('call the like handler function twice when the like button is clicked twice'), () => {}
+  test('render url and num of likes when "show details" button is clicked once', () => {
+    const button = container.querySelector('.showDetailsBtn')
+
+    userEvent.click(button)
+
+    const url = screen.getByText('https://reactpatterns.com/')
+    const likes = screen.getByText('Likes: 7')
+
+    expect(url).toBeVisible()
+    expect(likes).toBeVisible()
+  })
 })

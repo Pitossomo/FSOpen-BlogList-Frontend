@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import blogsService from '../../services/blogs'
+import LikeButton from '../LikeButton'
 
 const Blog = ({ blog, setBlogs, blogs, user }) => {
   const [showDetails, setShowDetails] = useState(false)
@@ -8,20 +9,6 @@ const Blog = ({ blog, setBlogs, blogs, user }) => {
   const detailsStyle = { display: showDetails ? '' : 'none' }
 
   const toggleDetails = () => setShowDetails(!showDetails)
-
-  const like = () => {
-    blogsService.like(blog)
-
-    const blogsUpdated = blogs.map(b => {
-      return b.id === blog.id
-        ? { ...b, likes: b.likes+1 }
-        : b
-    })
-
-    setBlogs(blogsUpdated)
-    // REMOVED sorting when liking a blog
-    // setBlogs(blogsUpdated.sort((a,b) => b.likes - a.likes))
-  }
 
   const remove = async () => {
     if (window.confirm('Do you REALLY want to DELETE this blog?')) {
@@ -44,10 +31,10 @@ const Blog = ({ blog, setBlogs, blogs, user }) => {
       <div>
         <span>{blog.title}</span>
         <span>{blog.author}</span>
-        <button onClick={toggleDetails}>
+        <button className='showDetailsBtn' onClick={toggleDetails}>
           {showDetails ? 'hide' : 'show'}
         </button>
-        <button onClick={like}>like</button>
+        <LikeButton blog={blog} setBlogs={setBlogs} blogs={blogs} />
         <div style={detailsStyle} >
           <p>{blog.url}</p>
           <p>Likes: {blog.likes}</p>
