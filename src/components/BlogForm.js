@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import blogsServices from "../services/blogs";
+import React, { useState } from 'react'
+import blogsServices from '../services/blogs'
 
-const BlogForm = ({addMessage, setBlogs, blogs}) => {
+const BlogForm = ({ setBlogs, blogs }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
@@ -12,29 +12,27 @@ const BlogForm = ({addMessage, setBlogs, blogs}) => {
       author: author,
       url: url
     }
-    
+
     blogsServices
       .create(newBlog)
       .then(returnedBlog => {
         setBlogs(blogs.concat(returnedBlog))
         setTitle('')
         setAuthor('')
-        setUrl('')   
-      }
-    )
+        setUrl('')
+      })
   }
 
   return (
     <div>
       <h2>Add new blog</h2>
       <form onSubmit={handleNewBlog}>
-        
         <div>
           <label>title</label>
-          <input 
+          <input
             type='text' name='title'
             value={title}
-            onChange={({target}) => setTitle(target.value)}        
+            onChange={({ target }) => setTitle(target.value)}
           />
         </div>
 
@@ -43,17 +41,17 @@ const BlogForm = ({addMessage, setBlogs, blogs}) => {
           <input
             type='text' name='author'
             value={author}
-            onChange={({target}) => setAuthor(target.value)}        
+            onChange={({ target }) => setAuthor(target.value)}
           />
-          
+
         </div>
 
         <div>
           <label>url</label>
-          <input 
+          <input
             type='text' name='url'
             value={url}
-            onChange={({target}) => setUrl(target.value)}        
+            onChange={({ target }) => setUrl(target.value)}
           />
         </div>
 

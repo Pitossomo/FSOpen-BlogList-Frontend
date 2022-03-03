@@ -1,8 +1,8 @@
-import React, { useState } from "react"
-import blogsService from "../services/blogs"
+import React, { useState } from 'react'
+import blogsService from '../services/blogs'
 import loginService from '../services/login'
 
-const LoginForm = ({setUser, addMessage}) => {
+const LoginForm = ({ setUser, addMessage }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
@@ -10,16 +10,12 @@ const LoginForm = ({setUser, addMessage}) => {
     event.preventDefault()
 
     try {
-      const user = await loginService.login({
-        username, password
-      })
-
+      const user = await loginService.login({ username, password })
       window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user))
-      
       blogsService.setToken(user.token)
-      setUser(user)
       setUsername('')
       setPassword('')
+      setUser(user) // setUser Must be the last setter of states, or the App will be remounted before reseting username and password
     } catch (exception) {
       addMessage('Wrong credentials', 'ERROR')
     }
@@ -29,13 +25,13 @@ const LoginForm = ({setUser, addMessage}) => {
     <div>
       <h2>Log in to application</h2>
       <form onSubmit={handleLogin}>
-        
+
         <div>
           <label>username</label>
           <input
             type='text' name='username'
             value={username}
-            onChange={({target}) => setUsername(target.value)}          
+            onChange={({ target }) => setUsername(target.value)}
           />
         </div>
 
@@ -44,10 +40,10 @@ const LoginForm = ({setUser, addMessage}) => {
           <input
             type='password' name='password'
             value={password}
-            onChange={({target}) => setPassword(target.value)}
+            onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-        
+
         <button type='submit'>Login</button>
       </form>
     </div>

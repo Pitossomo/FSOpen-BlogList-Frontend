@@ -24,7 +24,7 @@ const create = async newObject => {
 }
 
 const like = async blog => {
-  const blogUpdated = { 
+  const blogUpdated = {
     user: blog.user.id,
     author: blog.author,
     title: blog.title,
@@ -46,4 +46,5 @@ const remove = async blog => {
   return response.data
 }
 
-export default { setToken, getAll, create, like, remove }
+const blogService = { setToken, getAll, create, like, remove }
+export default blogService

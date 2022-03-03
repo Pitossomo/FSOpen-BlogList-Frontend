@@ -22,7 +22,7 @@ const App = () => {
     newMessages[type] = messages[type].concat(newMsg)
 
     setMessages(newMessages)
-    
+
     setTimeout(() => {
       setMessages({
         ERROR: [],
@@ -44,7 +44,7 @@ const App = () => {
     blogService.getAll().then(blogs => {
       setBlogs(blogs.sort((a,b) => b.likes - a.likes))
     })
-  }, []) 
+  }, [])
 
   return (
     <div>
@@ -53,12 +53,12 @@ const App = () => {
       <Greetings user={user} setUser={setUser} />
 
       <Alerts messages={messages} />
-      
+
       { user === null
         ? <LoginForm setUser={setUser} addMessage={addMessage} />
-        : <Toggable buttonLabel="New blog ...">
-            <BlogForm addMessage={addMessage} blogs={blogs} setBlogs={setBlogs} />
-          </Toggable>
+        : <Toggable buttonLabel='New blog ...'>
+          <BlogForm addMessage={addMessage} blogs={blogs} setBlogs={setBlogs} />
+        </Toggable>
       }
 
       <Blogs blogs={blogs} setBlogs={setBlogs} user={user} addMessage={addMessage} />

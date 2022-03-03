@@ -1,7 +1,7 @@
-import React from "react"
-import Blog from "./Blog"
+import React from 'react'
+import Blog from './Blog'
 
-const Blogs = ({blogs, setBlogs, user}) => {
+const Blogs = ({ blogs, setBlogs, user }) => {
   return (
     <div>
       <h2>blogs</h2>
