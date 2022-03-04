@@ -12,8 +12,6 @@ const LikeButton = ({ blog, blogs, setBlogs }) => {
     })
 
     setBlogs(blogsUpdated)
-    // REMOVED sorting when liking a blog
-    // setBlogs(blogsUpdated.sort((a,b) => b.likes - a.likes))
   }
 
   return (<button className='likeBtn' onClick={like}>like</button>)
