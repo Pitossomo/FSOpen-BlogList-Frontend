@@ -29,8 +29,7 @@ const Blog = ({ blog, setBlogs, blogs, user }) => {
   return (
     <div style={blogStyle}>
       <div>
-        <span>{blog.title}</span>
-        <span>{blog.author}</span>
+        <span> {blog.title}</span>, <i>{blog.author} </i>
         <button className='showDetailsBtn' onClick={toggleDetails}>
           {showDetails ? 'hide' : 'show'}
         </button>

@@ -31,6 +31,19 @@ const App = () => {
     }, 5000)
   }
 
+  const handleNewBlog = async (title, author, url) => {
+    const newBlog = {
+      title: title,
+      author: author,
+      url: url
+    }
+
+    const returnedBlog = await blogService.create(newBlog)
+
+    setBlogs(blogs.concat(returnedBlog))
+  }
+
+
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
     if (loggedUserJSON) {
@@ -57,7 +70,7 @@ const App = () => {
       { user === null
         ? <LoginForm setUser={setUser} addMessage={addMessage} />
         : <Toggable buttonLabel='New blog ...'>
-          <BlogForm addMessage={addMessage} blogs={blogs} setBlogs={setBlogs} />
+          <BlogForm addMessage={addMessage} handleNewBlog={handleNewBlog} />
         </Toggable>
       }
 

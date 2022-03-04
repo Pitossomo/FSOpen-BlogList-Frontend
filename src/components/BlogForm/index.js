@@ -1,36 +1,23 @@
 import React, { useState } from 'react'
-import blogsServices from '../services/blogs'
 
-const BlogForm = ({ setBlogs, blogs }) => {
+const BlogForm = ({ handleNewBlog }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
 
-  const handleNewBlog = () => {
-    const newBlog = {
-      title: title,
-      author: author,
-      url: url
-    }
-
-    blogsServices
-      .create(newBlog)
-      .then(returnedBlog => {
-        setBlogs(blogs.concat(returnedBlog))
-        setTitle('')
-        setAuthor('')
-        setUrl('')
-      })
+  const addNewBlog = async () => {
+    await handleNewBlog(title, author, url)
   }
 
   return (
     <div>
       <h2>Add new blog</h2>
-      <form onSubmit={handleNewBlog}>
+      <form onSubmit={addNewBlog}>
         <div>
           <label>title</label>
           <input
             type='text' name='title'
+            id='titleInput'
             value={title}
             onChange={({ target }) => setTitle(target.value)}
           />
@@ -40,6 +27,7 @@ const BlogForm = ({ setBlogs, blogs }) => {
           <label>author</label>
           <input
             type='text' name='author'
+            id='authorInput'
             value={author}
             onChange={({ target }) => setAuthor(target.value)}
           />
@@ -50,6 +38,7 @@ const BlogForm = ({ setBlogs, blogs }) => {
           <label>url</label>
           <input
             type='text' name='url'
+            id='urlInput'
             value={url}
             onChange={({ target }) => setUrl(target.value)}
           />
