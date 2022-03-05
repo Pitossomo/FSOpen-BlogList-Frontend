@@ -24,7 +24,7 @@ const LoginForm = ({ setUser, addMessage }) => {
   return (
     <div>
       <h2>Log in to application</h2>
-      <form onSubmit={handleLogin}>
+      <form id="loginForm" onSubmit={handleLogin}>
 
         <div>
           <label>username</label>
