@@ -14,11 +14,33 @@ describe('Blog app', function() {
     }
 
     cy.request('POST', 'http://localhost:3003/api/users', user)
+    cy.clearLocalStorage()
     cy.visit('http://localhost:3000')
   })
 
   it('Login form is shown', function() {
     cy.get('#loginForm')
     cy.contains('Log in to application')
+  })
+
+  describe('Login', function() {
+    it('succeeds with correct credentials', function() {
+      cy.get('#usernameField').type('pitossomo')
+      cy.get('#passwordField').type('pitossomo')
+      cy.get('#loginBtn').click()
+
+      cy.contains('Hello, pitossomo')
+    })
+
+    it('fails with wrong credentials', function() {
+      cy.get('#usernameField').type('pirossomo')
+      cy.get('#passwordField').type('pirossomo')
+      cy.get('#loginBtn').click()
+
+      cy.get('#errorAlerts')
+        .should('contain','Wrong credentials')
+        .should('have.css', 'color', 'rgb(255, 0, 0)')
+    })
+
   })
 })

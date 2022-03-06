@@ -15,7 +15,7 @@ const LoginForm = ({ setUser, addMessage }) => {
       blogsService.setToken(user.token)
       setUsername('')
       setPassword('')
-      setUser(user) // setUser Must be the last setter of states, or the App will be remounted before reseting username and password
+      setUser(user)
     } catch (exception) {
       addMessage('Wrong credentials', 'ERROR')
     }
@@ -30,6 +30,7 @@ const LoginForm = ({ setUser, addMessage }) => {
           <label>username</label>
           <input
             type='text' name='username'
+            id='usernameField'
             value={username}
             onChange={({ target }) => setUsername(target.value)}
           />
@@ -39,12 +40,13 @@ const LoginForm = ({ setUser, addMessage }) => {
           <label>password</label>
           <input
             type='password' name='password'
+            id='passwordField'
             value={password}
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
 
-        <button type='submit'>Login</button>
+        <button id='loginBtn' type='submit'>Login</button>
       </form>
     </div>
   )

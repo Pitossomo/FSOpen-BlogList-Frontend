@@ -30,7 +30,7 @@ const Alerts = ({ messages }) => {
   return (
     <div>
       { messages.SUCCESS.length > 0 ?
-        <ul style={successStyle}>
+        <ul id='successAlerts' style={successStyle}>
           { messages['SUCCESS'].map((msg,i) => (
             <SuccessMsg key={`succmsg${i}`} text={msg} />
           ))}
@@ -39,7 +39,7 @@ const Alerts = ({ messages }) => {
       }
 
       { messages.ERROR.length > 0 ?
-        <ul style={errorStyle}>
+        <ul id='errorAlerts' style={errorStyle}>
           { messages['ERROR'].map((msg, i) => (
             <ErrorMsg key={`errmsg${i}`} text={msg} />
           ))}
