@@ -30,7 +30,7 @@ const LoginForm = ({ setUser, addMessage }) => {
           <label>username</label>
           <input
             type='text' name='username'
-            id='usernameField'
+            id='usernameInput'
             value={username}
             onChange={({ target }) => setUsername(target.value)}
           />
@@ -40,7 +40,7 @@ const LoginForm = ({ setUser, addMessage }) => {
           <label>password</label>
           <input
             type='password' name='password'
-            id='passwordField'
+            id='passwordInput'
             value={password}
             onChange={({ target }) => setPassword(target.value)}
           />

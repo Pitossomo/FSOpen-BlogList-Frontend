@@ -69,7 +69,7 @@ const App = () => {
 
       { user === null
         ? <LoginForm setUser={setUser} addMessage={addMessage} />
-        : <Toggable buttonLabel='New blog ...'>
+        : <Toggable buttonLabel='New blog...'>
           <BlogForm addMessage={addMessage} handleNewBlog={handleNewBlog} />
         </Toggable>
       }
