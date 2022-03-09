@@ -27,22 +27,20 @@ const Blog = ({ blog, setBlogs, blogs, user }) => {
   }
 
   return (
-    <div style={blogStyle}>
-      <div>
-        <span> {blog.title}</span>, <i>{blog.author} </i>
-        <button className='showDetailsBtn' onClick={toggleDetails}>
-          {showDetails ? 'hide' : 'show'}
-        </button>
-        <LikeButton blog={blog} setBlogs={setBlogs} blogs={blogs} />
-        <div style={detailsStyle} >
-          <p>{blog.url}</p>
-          <p>Likes: {blog.likes}</p>
-          <p>{blog.user.name}</p>
-          { user && user.username === blog.user.username
-            ? <button onClick={remove}>delete</button>
-            : null
-          }
-        </div>
+    <div className='blogCard' style={blogStyle}>
+      <span className='mainInfo'> {blog.title}</span>, <i>{blog.author} </i>
+      <button className='showDetailsBtn' onClick={toggleDetails}>
+        {showDetails ? 'hide' : 'show'}
+      </button>
+      <LikeButton blog={blog} setBlogs={setBlogs} blogs={blogs} />
+      <div style={detailsStyle}>
+        <p className='url' >{blog.url}</p>
+        <p className='likes' >Likes: {blog.likes}</p>
+        <p className='creatorName'>{blog.user.name}</p>
+        { user && user.username === blog.user.username
+          ? <button className='deleteBtn' onClick={remove}>delete</button>
+          : null
+        }
       </div>
     </div>
   )
