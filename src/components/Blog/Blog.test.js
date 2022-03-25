@@ -14,14 +14,16 @@ describe('<Blog /> component', () => {
     user: {
       name: 'Pitossomo',
       username: 'Pitossomo',
-      id: '5a422aa71b54a676234d17f4'
-    }
+      id: '5a422aa71b54a676234d17f4',
+    },
   }
 
   let container
 
   beforeEach(() => {
-    container = render(<Blog blog={blog} blogs={[blog]} setBlogs={() => {}} />).container
+    container = render(
+      <Blog blog={blog} blogs={[blog]} setBlogs={() => {}} />
+    ).container
   })
 
   test('render title and author, but not url and num of likes by default', () => {

@@ -13,7 +13,7 @@ const Blog = ({ blog, setBlogs, blogs, user }) => {
   const remove = async () => {
     if (window.confirm('Do you REALLY want to DELETE this blog?')) {
       await blogsService.remove(blog)
-      const blogsUpdated = blogs.filter(b => b.id !== blog.id)
+      const blogsUpdated = blogs.filter((b) => b.id !== blog.id)
       setBlogs(blogsUpdated)
     }
   }
@@ -23,7 +23,7 @@ const Blog = ({ blog, setBlogs, blogs, user }) => {
     paddingLeft: 2,
     border: 'solid',
     borderWidth: 1,
-    marginBottom: 5
+    marginBottom: 5,
   }
 
   return (
@@ -34,13 +34,14 @@ const Blog = ({ blog, setBlogs, blogs, user }) => {
       </button>
       <LikeButton blog={blog} setBlogs={setBlogs} blogs={blogs} />
       <div style={detailsStyle}>
-        <p className='url' >{blog.url}</p>
-        <p className='likes' >Likes: {blog.likes}</p>
+        <p className='url'>{blog.url}</p>
+        <p className='likes'>Likes: {blog.likes}</p>
         <p className='creatorName'>{blog.user.name}</p>
-        { user && user.username === blog.user.username
-          ? <button className='deleteBtn' onClick={remove}>delete</button>
-          : null
-        }
+        {user && user.username === blog.user.username ? (
+          <button className='deleteBtn' onClick={remove}>
+            delete
+          </button>
+        ) : null}
       </div>
     </div>
   )
@@ -50,7 +51,7 @@ Blog.propTypes = {
   blog: PropTypes.object.isRequired,
   blogs: PropTypes.array.isRequired,
   user: PropTypes.object,
-  setBlogs: PropTypes.func.isRequired
+  setBlogs: PropTypes.func.isRequired,
 }
 
 export default Blog

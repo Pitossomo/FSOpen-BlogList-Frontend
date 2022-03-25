@@ -14,15 +14,14 @@ describe('Like button', () => {
     user: {
       name: 'Pitossomo',
       username: 'Pitossomo',
-      id: '5a422aa71b54a676234d17f4'
-    }
+      id: '5a422aa71b54a676234d17f4',
+    },
   }
 
   test('call the like handler function twice when the like button is clicked twice', () => {
-
     const mockHandler = jest.fn()
 
-    render(<LikeButton blog={blog} blogs={[blog]} setBlogs={mockHandler}  />)
+    render(<LikeButton blog={blog} blogs={[blog]} setBlogs={mockHandler} />)
 
     const button = screen.getByText('like')
     userEvent.click(button)

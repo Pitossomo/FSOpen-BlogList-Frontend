@@ -8,7 +8,7 @@ const errorStyle = {
   padding: 24,
   margin: 4,
   border: 'solid 2px red',
-  borderRadius: '5px'
+  borderRadius: '5px',
 }
 
 /* CSS for success class */
@@ -19,7 +19,7 @@ const successStyle = {
   padding: 24,
   margin: 4,
   border: 'solid 2px green',
-  borderRadius: '5px'
+  borderRadius: '5px',
 }
 
 const SuccessMsg = ({ text }) => <li>{text}</li>
@@ -29,22 +29,21 @@ const ErrorMsg = ({ text }) => <li>{text}</li>
 const Alerts = ({ messages }) => {
   return (
     <div>
-      { messages.SUCCESS.length > 0 ?
+      {messages.SUCCESS.length > 0 ? (
         <ul id='successAlerts' style={successStyle}>
-          { messages['SUCCESS'].map((msg,i) => (
+          {messages['SUCCESS'].map((msg, i) => (
             <SuccessMsg key={`succmsg${i}`} text={msg} />
           ))}
         </ul>
-        : null
-      }
+      ) : null}
 
-      { messages.ERROR.length > 0 ?
+      {messages.ERROR.length > 0 ? (
         <ul id='errorAlerts' style={errorStyle}>
-          { messages['ERROR'].map((msg, i) => (
+          {messages['ERROR'].map((msg, i) => (
             <ErrorMsg key={`errmsg${i}`} text={msg} />
           ))}
         </ul>
-        : null }
+      ) : null}
     </div>
   )
 }

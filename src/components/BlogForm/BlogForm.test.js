@@ -12,8 +12,8 @@ describe('<BlogForm /> component', () => {
     user: {
       name: 'Pitossomo',
       username: 'Pitossomo',
-      id: '5a422aa71b54a676234d17f4'
-    }
+      id: '5a422aa71b54a676234d17f4',
+    },
   }
 
   test('calls the event handler received as props with the right details when a new blog is created', () => {

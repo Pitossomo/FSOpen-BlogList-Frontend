@@ -10,12 +10,10 @@ import Toggable from './components/Toggable'
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
-  const [messages, setMessages] = useState(
-    {
-      ERROR: [],
-      SUCCESS: []
-    }
-  )
+  const [messages, setMessages] = useState({
+    ERROR: [],
+    SUCCESS: [],
+  })
 
   const addMessage = (newMsg, type) => {
     const newMessages = { ...messages }
@@ -26,7 +24,7 @@ const App = () => {
     setTimeout(() => {
       setMessages({
         ERROR: [],
-        SUCCESS: []
+        SUCCESS: [],
       })
     }, 5000)
   }
@@ -35,14 +33,13 @@ const App = () => {
     const newBlog = {
       title: title,
       author: author,
-      url: url
+      url: url,
     }
 
     const returnedBlog = await blogService.create(newBlog)
 
     setBlogs(blogs.concat(returnedBlog))
   }
-
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
@@ -54,8 +51,8 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    blogService.getAll().then(blogs => {
-      setBlogs(blogs.sort((a,b) => b.likes - a.likes))
+    blogService.getAll().then((blogs) => {
+      setBlogs(blogs.sort((a, b) => b.likes - a.likes))
     })
   }, [])
 
@@ -67,14 +64,20 @@ const App = () => {
 
       <Alerts messages={messages} />
 
-      { user === null
-        ? <LoginForm setUser={setUser} addMessage={addMessage} />
-        : <Toggable buttonLabel='New blog...'>
+      {user === null ? (
+        <LoginForm setUser={setUser} addMessage={addMessage} />
+      ) : (
+        <Toggable buttonLabel='New blog...'>
           <BlogForm addMessage={addMessage} handleNewBlog={handleNewBlog} />
         </Toggable>
-      }
+      )}
 
-      <Blogs blogs={blogs} setBlogs={setBlogs} user={user} addMessage={addMessage} />
+      <Blogs
+        blogs={blogs}
+        setBlogs={setBlogs}
+        user={user}
+        addMessage={addMessage}
+      />
     </div>
   )
 }
