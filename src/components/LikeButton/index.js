@@ -1,19 +1,16 @@
 import React from 'react'
-import blogService from '../../services/blogs'
+import { useDispatch } from 'react-redux'
+import { likeBlog } from '../../reducers/blogReducer'
 
-const LikeButton = ({ blog, blogs, setBlogs }) => {
-  const like = () => {
-    blogService.like(blog)
+const LikeButton = ({ blog }) => {
+  const dispatch = useDispatch()
 
-    const blogsUpdated = blogs.map((b) => {
-      return b.id === blog.id ? { ...b, likes: b.likes + 1 } : b
-    })
-
-    setBlogs(blogsUpdated)
+  const handleLike = () => {
+    dispatch(likeBlog(blog))
   }
 
   return (
-    <button className='likeBtn' onClick={like}>
+    <button className='likeBtn' onClick={handleLike}>
       like
     </button>
   )

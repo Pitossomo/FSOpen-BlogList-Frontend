@@ -6,9 +6,11 @@ import BlogForm from './components/BlogForm'
 import Greetings from './components/Greetings'
 import blogService from './services/blogs'
 import Toggable from './components/Toggable'
+import { useDispatch } from 'react-redux'
+import { initializeBlogs } from './reducers/blogReducer'
 
 const App = () => {
-  const [blogs, setBlogs] = useState([])
+  const dispatch = useDispatch()
   const [user, setUser] = useState(null)
   const [messages, setMessages] = useState({
     ERROR: [],
@@ -29,18 +31,6 @@ const App = () => {
     }, 5000)
   }
 
-  const handleNewBlog = async (title, author, url) => {
-    const newBlog = {
-      title: title,
-      author: author,
-      url: url,
-    }
-
-    const returnedBlog = await blogService.create(newBlog)
-
-    setBlogs(blogs.concat(returnedBlog))
-  }
-
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
     if (loggedUserJSON) {
@@ -51,10 +41,8 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    blogService.getAll().then((blogs) => {
-      setBlogs(blogs.sort((a, b) => b.likes - a.likes))
-    })
-  }, [])
+    dispatch(initializeBlogs())
+  }, [dispatch])
 
   return (
     <div>
@@ -68,16 +56,11 @@ const App = () => {
         <LoginForm setUser={setUser} addMessage={addMessage} />
       ) : (
         <Toggable buttonLabel='New blog...'>
-          <BlogForm addMessage={addMessage} handleNewBlog={handleNewBlog} />
+          <BlogForm addMessage={addMessage} />
         </Toggable>
       )}
 
-      <Blogs
-        blogs={blogs}
-        setBlogs={setBlogs}
-        user={user}
-        addMessage={addMessage}
-      />
+      <Blogs user={user} addMessage={addMessage} />
     </div>
   )
 }

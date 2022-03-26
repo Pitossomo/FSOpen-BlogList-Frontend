@@ -1,20 +1,21 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import blogsService from '../../services/blogs'
+import { useDispatch } from 'react-redux'
+import { removeBlog } from '../../reducers/blogReducer'
 import LikeButton from '../LikeButton'
 
-const Blog = ({ blog, setBlogs, blogs, user }) => {
+const Blog = ({ blog, user }) => {
+  const dispatch = useDispatch()
+
   const [showDetails, setShowDetails] = useState(false)
 
   const detailsStyle = { display: showDetails ? '' : 'none' }
 
   const toggleDetails = () => setShowDetails(!showDetails)
 
-  const remove = async () => {
+  const handleDelete = async () => {
     if (window.confirm('Do you REALLY want to DELETE this blog?')) {
-      await blogsService.remove(blog)
-      const blogsUpdated = blogs.filter((b) => b.id !== blog.id)
-      setBlogs(blogsUpdated)
+      dispatch(removeBlog(blog))
     }
   }
 
@@ -32,13 +33,13 @@ const Blog = ({ blog, setBlogs, blogs, user }) => {
       <button className='showDetailsBtn' onClick={toggleDetails}>
         {showDetails ? 'hide' : 'show'}
       </button>
-      <LikeButton blog={blog} setBlogs={setBlogs} blogs={blogs} />
+      <LikeButton blog={blog} />
       <div style={detailsStyle}>
         <p className='url'>{blog.url}</p>
         <p className='likes'>Likes: {blog.likes}</p>
         <p className='creatorName'>{blog.user.name}</p>
         {user && user.username === blog.user.username ? (
-          <button className='deleteBtn' onClick={remove}>
+          <button className='deleteBtn' onClick={handleDelete}>
             delete
           </button>
         ) : null}
@@ -49,9 +50,7 @@ const Blog = ({ blog, setBlogs, blogs, user }) => {
 
 Blog.propTypes = {
   blog: PropTypes.object.isRequired,
-  blogs: PropTypes.array.isRequired,
   user: PropTypes.object,
-  setBlogs: PropTypes.func.isRequired,
 }
 
 export default Blog

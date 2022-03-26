@@ -24,6 +24,7 @@ const create = async (newObject) => {
 }
 
 const like = async (blog) => {
+  // TODO - change it - this kind of operation let's anyone update any blog
   const blogUpdated = {
     user: blog.user.id,
     author: blog.author,
