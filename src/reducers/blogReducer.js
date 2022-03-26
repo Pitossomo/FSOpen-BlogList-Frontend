@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import blogService from '../services/blogs'
-import { addNewAlert } from './alertReducer'
+import { createNewAlert } from './alertReducer'
 
 const initialState = []
 
@@ -16,7 +16,7 @@ const blogSlice = createSlice({
     },
     updateElement(state, action) {
       const blog = action.payload
-      const blogs = state.map((e) => (e.id === blog.id ? blog : e))
+      const blogs = state.map((b) => (b.id === blog.id ? blog : b))
       return sortByLikes(blogs)
     },
     removeElement(state, action) {
@@ -44,7 +44,9 @@ export const createNewBlog = (newBlog) => {
   return async (dispatch) => {
     const blogCreated = await blogService.create(newBlog)
     dispatch(addElement(blogCreated))
-    dispatch(addNewAlert(`New blog created: ${blogCreated.title}`, 'success'))
+    dispatch(
+      createNewAlert(`New blog created: ${blogCreated.title}`, 'success')
+    )
   }
 }
 
@@ -52,7 +54,7 @@ export const likeBlog = (blog) => {
   return async (dispatch) => {
     const blogLiked = await blogService.like(blog)
     dispatch(updateElement(blogLiked))
-    dispatch(addNewAlert(`You like ${blogLiked.title}`, 'success'))
+    dispatch(createNewAlert(`You like ${blogLiked.title}`, 'success'))
   }
 }
 
@@ -60,7 +62,7 @@ export const removeBlog = (blog) => {
   return async (dispatch) => {
     await blogService.remove(blog)
     dispatch(removeElement(blog))
-    dispatch(addNewAlert(`You removed: ${blog.title}`, 'attention'))
+    dispatch(createNewAlert(`You removed: ${blog.title}`, 'attention'))
   }
 }
 

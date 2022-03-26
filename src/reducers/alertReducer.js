@@ -35,7 +35,7 @@ const newAlert = (messages, type, timeInSeconds, dispatch) => {
   }
 }
 
-export const addNewAlert = (
+export const createNewAlert = (
   messages,
   type = 'attention',
   timeInSeconds = 10

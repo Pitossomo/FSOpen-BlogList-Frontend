@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { addNewAlert } from '../reducers/alertReducer'
+import { createNewAlert } from '../reducers/alertReducer'
 import blogsService from '../services/blogs'
 import loginService from '../services/login'
 
@@ -21,7 +21,7 @@ const LoginForm = ({ setUser }) => {
       setPassword('')
       setUser(user)
     } catch (exception) {
-      dispatch(addNewAlert('Wrong credentials', 'error'))
+      dispatch(createNewAlert('Wrong credentials', 'error'))
     }
   }
 
