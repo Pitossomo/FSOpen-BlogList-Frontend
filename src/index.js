@@ -3,11 +3,13 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import App from './App'
+import alertReducer from './reducers/alertReducer'
 import blogReducer from './reducers/blogReducer'
 
 const store = configureStore({
   reducer: {
     blogs: blogReducer,
+    alerts: alertReducer,
   },
 })
 

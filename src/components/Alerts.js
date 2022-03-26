@@ -1,51 +1,35 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
-/* CSS for error class */
-const errorStyle = {
-  color: 'red',
-  fontStyle: 'italic',
-  fontSize: 16,
-  padding: 24,
-  margin: 4,
-  border: 'solid 2px red',
-  borderRadius: '5px',
+const typeToColor = {
+  success: 'forestgreen',
+  attention: 'goldenrod',
+  error: 'tomato',
 }
 
-/* CSS for success class */
-const successStyle = {
-  color: 'green',
-  fontStyle: 'italic',
-  fontSize: 16,
-  padding: 24,
-  margin: 4,
-  border: 'solid 2px green',
-  borderRadius: '5px',
-}
+const Alerts = () => {
+  const alerts = useSelector((state) => state.alerts)
 
-const SuccessMsg = ({ text }) => <li>{text}</li>
+  const color = typeToColor[alerts.type]
+  const style = {
+    fontStyle: 'italic',
+    fontSize: 16,
+    padding: 24,
+    margin: 4,
+    color: color,
+    border: `solid 2px ${color}`,
+    borderRadius: '5px',
+  }
 
-const ErrorMsg = ({ text }) => <li>{text}</li>
-
-const Alerts = ({ messages }) => {
-  return (
-    <div>
-      {messages.SUCCESS.length > 0 ? (
-        <ul id='successAlerts' style={successStyle}>
-          {messages['SUCCESS'].map((msg, i) => (
-            <SuccessMsg key={`succmsg${i}`} text={msg} />
-          ))}
-        </ul>
-      ) : null}
-
-      {messages.ERROR.length > 0 ? (
-        <ul id='errorAlerts' style={errorStyle}>
-          {messages['ERROR'].map((msg, i) => (
-            <ErrorMsg key={`errmsg${i}`} text={msg} />
-          ))}
-        </ul>
-      ) : null}
-    </div>
-  )
+  if (alerts.messages.length > 0)
+    return (
+      <ul style={style}>
+        {alerts.messages.map((alert, i) => (
+          <li key={`alert${i}`}>{alert}</li>
+        ))}
+      </ul>
+    )
+  else return null
 }
 
 export default Alerts
