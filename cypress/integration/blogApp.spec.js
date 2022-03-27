@@ -72,7 +72,7 @@ describe('Blog app', function () {
       cy.get('#loginBtn').click()
 
       cy.get('#errorAlerts').should('contain', 'Wrong credentials')
-      //should('have.css', 'color', 'rgb(255, 0, 0)')
+      //  .should('have.css', 'color', 'rgb(255, 0, 0)')
     })
   })
 

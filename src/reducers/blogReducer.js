@@ -42,8 +42,8 @@ export const initializeBlogs = () => {
 
 export const createNewBlog = (newBlog) => {
   return async (dispatch) => {
+    dispatch(addElement(newBlog))
     const blogCreated = await blogService.create(newBlog)
-    dispatch(addElement(blogCreated))
     dispatch(
       createNewAlert(`New blog created: ${blogCreated.title}`, 'success')
     )
@@ -52,16 +52,20 @@ export const createNewBlog = (newBlog) => {
 
 export const likeBlog = (blog) => {
   return async (dispatch) => {
-    const blogLiked = await blogService.like(blog)
-    dispatch(updateElement(blogLiked))
-    dispatch(createNewAlert(`You like ${blogLiked.title}`, 'success'))
+    const newBlog = {
+      ...blog,
+      likes: blog.likes + 1,
+    }
+    dispatch(updateElement(newBlog))
+    await blogService.like(blog)
+    dispatch(createNewAlert(`You like ${blog.title}`, 'success'))
   }
 }
 
 export const removeBlog = (blog) => {
   return async (dispatch) => {
-    await blogService.remove(blog)
     dispatch(removeElement(blog))
+    await blogService.remove(blog)
     dispatch(createNewAlert(`You removed: ${blog.title}`, 'attention'))
   }
 }

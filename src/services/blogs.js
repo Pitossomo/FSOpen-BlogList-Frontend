@@ -24,16 +24,15 @@ const create = async (newObject) => {
 }
 
 const like = async (blog) => {
-  // TODO - change it - this kind of operation let's anyone update any blog
+  console.log('blog clicked: ', blog)
   const blogUpdated = {
-    user: blog.user.id,
-    author: blog.author,
-    title: blog.title,
-    url: blog.url,
+    ...blog,
     likes: blog['likes'] + 1,
   }
+  console.log('blog updated: ', blogUpdated)
 
   const response = await axios.put(`${baseUrl}/${blog.id}`, blogUpdated)
+  console.log('blog returned from server: ', response.data)
 
   return response.data
 }
