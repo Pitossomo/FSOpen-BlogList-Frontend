@@ -24,16 +24,7 @@ const create = async (newObject) => {
 }
 
 const like = async (blog) => {
-  console.log('blog clicked: ', blog)
-  const blogUpdated = {
-    ...blog,
-    likes: blog['likes'] + 1,
-  }
-  console.log('blog updated: ', blogUpdated)
-
-  const response = await axios.put(`${baseUrl}/${blog.id}`, blogUpdated)
-  console.log('blog returned from server: ', response.data)
-
+  const response = await axios.post(`${baseUrl}/like/${blog.id}`)
   return response.data
 }
 
