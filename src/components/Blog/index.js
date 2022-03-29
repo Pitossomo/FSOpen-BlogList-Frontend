@@ -15,7 +15,6 @@ const Blog = ({ blog }) => {
   const toggleDetails = () => setShowDetails(!showDetails)
 
   const handleDelete = async () => {
-    console.log(blog)
     if (window.confirm('Do you REALLY want to DELETE this blog?')) {
       dispatch(removeBlog(blog))
     }
@@ -28,8 +27,6 @@ const Blog = ({ blog }) => {
     borderWidth: 1,
     marginBottom: 5,
   }
-
-  console.log(blog)
 
   return (
     <div className='blogCard' style={blogStyle}>

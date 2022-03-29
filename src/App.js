@@ -8,15 +8,17 @@ import Toggable from './components/Toggable'
 import { useDispatch, useSelector } from 'react-redux'
 import { initializeBlogs } from './reducers/blogReducer'
 import { initializeAuth } from './reducers/authReducer'
+import { initializeUsers } from './reducers/userReducer'
+import Users from './components/Users'
 
 const App = () => {
   const dispatch = useDispatch()
   const loggedUser = useSelector((state) => state.auth)
-  console.log(loggedUser)
 
   useEffect(() => {
     dispatch(initializeAuth())
     dispatch(initializeBlogs())
+    dispatch(initializeUsers())
   }, [dispatch])
 
   return (
@@ -24,7 +26,6 @@ const App = () => {
       <h1>Blogs</h1>
 
       <Greetings />
-
       <Alerts />
 
       {loggedUser && loggedUser.username !== null ? (
@@ -36,6 +37,7 @@ const App = () => {
       )}
 
       <Blogs />
+      <Users />
     </div>
   )
 }

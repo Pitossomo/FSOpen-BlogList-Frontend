@@ -18,11 +18,8 @@ const authSlice = createSlice({
       return action.payload
     },
     logout(state, action) {
-      console.log(window.localStorage)
       window.localStorage.clear()
-      console.log(window.localStorage)
       blogService.setToken(null)
-      console.log(state)
       return initialState
     },
   },
@@ -33,7 +30,6 @@ export const { setUser, logout } = authSlice.actions
 export const initializeAuth = () => {
   return (dispatch) => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
-    console.log(loggedUserJSON)
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       dispatch(setUser(user))
