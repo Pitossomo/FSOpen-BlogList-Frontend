@@ -10,6 +10,7 @@ import { initializeBlogs } from './reducers/blogReducer'
 import { initializeAuth } from './reducers/authReducer'
 import { initializeUsers } from './reducers/userReducer'
 import Users from './components/Users'
+import { BrowserRouter as Router, Link, Routes, Route } from 'react-router-dom'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -36,8 +37,16 @@ const App = () => {
         <LoginForm />
       )}
 
-      <Blogs />
-      <Users />
+      <Router>
+        <nav>
+          <Link to='/users'>Users</Link>
+          <Link to='/blogs'>Blogs</Link>
+        </nav>
+        <Routes>
+          <Route path='/users' element={<Users />} />
+          <Route path='/blogs' element={<Blogs />} />
+        </Routes>
+      </Router>
     </div>
   )
 }
