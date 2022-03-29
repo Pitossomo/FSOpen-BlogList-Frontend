@@ -11,6 +11,7 @@ import { initializeAuth } from './reducers/authReducer'
 import { initializeUsers } from './reducers/userReducer'
 import Users from './components/Users'
 import { BrowserRouter as Router, Link, Routes, Route } from 'react-router-dom'
+import Nav from './components/Nav'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -26,22 +27,20 @@ const App = () => {
     <div>
       <h1>Blogs</h1>
 
-      <Greetings />
-      <Alerts />
-
-      {loggedUser && loggedUser.username !== null ? (
-        <Toggable buttonLabel='New blog...'>
-          <BlogForm />
-        </Toggable>
-      ) : (
-        <LoginForm />
-      )}
-
       <Router>
-        <nav>
-          <Link to='/users'>Users</Link>
-          <Link to='/blogs'>Blogs</Link>
-        </nav>
+        <Nav />
+
+        <Greetings />
+        <Alerts />
+
+        {loggedUser && loggedUser.username !== null ? (
+          <Toggable buttonLabel='New blog...'>
+            <BlogForm />
+          </Toggable>
+        ) : (
+          <LoginForm />
+        )}
+
         <Routes>
           <Route path='/users' element={<Users />} />
           <Route path='/blogs' element={<Blogs />} />
