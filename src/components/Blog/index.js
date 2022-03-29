@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { removeBlog } from '../../reducers/blogReducer'
 import LikeButton from '../LikeButton'
 
-const Blog = ({ blog, user }) => {
+const Blog = ({ blog }) => {
   const dispatch = useDispatch()
+  const user = useSelector((state) => state.auth)
 
   const [showDetails, setShowDetails] = useState(false)
 
@@ -14,6 +15,7 @@ const Blog = ({ blog, user }) => {
   const toggleDetails = () => setShowDetails(!showDetails)
 
   const handleDelete = async () => {
+    console.log(blog)
     if (window.confirm('Do you REALLY want to DELETE this blog?')) {
       dispatch(removeBlog(blog))
     }
@@ -27,6 +29,8 @@ const Blog = ({ blog, user }) => {
     marginBottom: 5,
   }
 
+  console.log(blog)
+
   return (
     <div className='blogCard' style={blogStyle}>
       <span className='mainInfo'> {blog.title}</span>, <i>{blog.author} </i>
@@ -37,7 +41,9 @@ const Blog = ({ blog, user }) => {
       <div style={detailsStyle}>
         <p className='url'>{blog.url}</p>
         <p className='likes'>Likes: {blog.likes}</p>
-        <p className='creatorName'>{blog.user.name}</p>
+        {blog.user !== null ? (
+          <p className='creatorName'>{blog.user.name}</p>
+        ) : null}
         {user && user.username === blog.user.username ? (
           <button className='deleteBtn' onClick={handleDelete}>
             delete

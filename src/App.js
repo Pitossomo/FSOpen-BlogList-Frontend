@@ -1,28 +1,21 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Alerts from './components/Alerts'
 import Blogs from './components/Blogs'
 import LoginForm from './components/LoginForm'
 import BlogForm from './components/BlogForm'
 import Greetings from './components/Greetings'
-import blogService from './services/blogs'
 import Toggable from './components/Toggable'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { initializeBlogs } from './reducers/blogReducer'
+import { initializeAuth } from './reducers/authReducer'
 
 const App = () => {
   const dispatch = useDispatch()
-  const [user, setUser] = useState(null)
+  const loggedUser = useSelector((state) => state.auth)
+  console.log(loggedUser)
 
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      setUser(user)
-      blogService.setToken(user.token)
-    }
-  }, [])
-
-  useEffect(() => {
+    dispatch(initializeAuth())
     dispatch(initializeBlogs())
   }, [dispatch])
 
@@ -30,19 +23,19 @@ const App = () => {
     <div>
       <h1>Blogs</h1>
 
-      <Greetings user={user} setUser={setUser} />
+      <Greetings />
 
       <Alerts />
 
-      {user === null ? (
-        <LoginForm setUser={setUser} />
-      ) : (
+      {loggedUser && loggedUser.username !== null ? (
         <Toggable buttonLabel='New blog...'>
           <BlogForm />
         </Toggable>
+      ) : (
+        <LoginForm />
       )}
 
-      <Blogs user={user} />
+      <Blogs />
     </div>
   )
 }

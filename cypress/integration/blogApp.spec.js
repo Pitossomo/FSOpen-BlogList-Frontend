@@ -71,7 +71,7 @@ describe('Blog app', function () {
       cy.get('#passwordInput').type('pirossomo')
       cy.get('#loginBtn').click()
 
-      cy.get('#errorAlerts').should('contain', 'Wrong credentials')
+      cy.get('#alerts').should('contain', 'Wrong credentials')
       //  .should('have.css', 'color', 'rgb(255, 0, 0)')
     })
   })

@@ -23,7 +23,7 @@ const Alerts = () => {
 
   if (alerts.messages.length > 0)
     return (
-      <ul style={style}>
+      <ul id='alerts' style={style}>
         {alerts.messages.map((alert, i) => (
           <li key={`alert${i}`}>{alert}</li>
         ))}
