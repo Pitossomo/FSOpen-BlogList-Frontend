@@ -13,6 +13,7 @@ import Users from './components/Users'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Nav from './components/Nav'
 import UserView from './components/UserView'
+import BlogView from './components/BlogView'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -43,6 +44,7 @@ const App = () => {
         )}
 
         <Routes>
+          <Route path='/blogs/:id' element={<BlogView />} />
           <Route path='/users/:id' element={<UserView />} />
           <Route path='/users' element={<Users />} />
           <Route path='/blogs' element={<Blogs />} />
