@@ -1,11 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { removeBlog } from '../reducers/blogReducer'
+import { commentBlog, removeBlog } from '../reducers/blogReducer'
 import LikeButton from './LikeButton'
 
 const BlogView = () => {
   const dispatch = useDispatch()
+
   const user = useSelector((state) => state.auth)
+
+  const handleNewComment = (e) => {
+    e.preventDefault()
+    dispatch(commentBlog(blog, e.target.newComment.value))
+  }
 
   const handleDelete = async () => {
     if (window.confirm('Do you REALLY want to DELETE this blog?')) {
@@ -35,6 +41,20 @@ const BlogView = () => {
           <button className='deleteBtn' onClick={handleDelete}>
             delete
           </button>
+        ) : null}
+      </div>
+      <div>
+        <h3>Comments</h3>
+        <form onSubmit={handleNewComment}>
+          <input name='newComment' type='text' />
+          <button type='submit'>add comment</button>
+        </form>
+        {blog.comments ? (
+          <ul>
+            {blog.comments.map((c, i) => (
+              <li key={`com${i}`}>{c}</li>
+            ))}
+          </ul>
         ) : null}
       </div>
     </div>

@@ -3,7 +3,6 @@ import Alerts from './components/Alerts'
 import Blogs from './components/Blogs'
 import LoginForm from './components/LoginForm'
 import BlogForm from './components/BlogForm'
-import Greetings from './components/Greetings'
 import Toggable from './components/Toggable'
 import { useDispatch, useSelector } from 'react-redux'
 import { initializeBlogs } from './reducers/blogReducer'
@@ -32,7 +31,6 @@ const App = () => {
       <Router>
         <Nav />
 
-        <Greetings />
         <Alerts />
 
         {loggedUser && loggedUser.username !== null ? (

@@ -12,12 +12,12 @@ const Greetings = () => {
 
   if (user && user.username !== null)
     return (
-      <div>
-        <p>Hello, {user.username}</p>
+      <span>
+        Hello, {user.username}
         <button onClick={handleLogout}>
           <small>Logout</small>
         </button>
-      </div>
+      </span>
     )
 
   return null

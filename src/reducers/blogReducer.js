@@ -111,4 +111,19 @@ export const removeBlog = (blog) => {
   }
 }
 
+export const commentBlog = (blog, comment) => {
+  return async (dispatch) => {
+    const newBlog = { ...blog, comment: blog.comments.concat(comment) }
+    dispatch(updateElement(newBlog))
+    try {
+      await blogService.comment(blog, comment)
+      dispatch(createNewAlert('You made a new comment', 'success'))
+    } catch (error) {
+      dispatch(createNewAlert('Something went wrong :´(', 'error'))
+      // in case of error, remove the preliminar blog (created previously) from the state
+      dispatch(updateElement(blog))
+    }
+  }
+}
+
 export default blogSlice.reducer

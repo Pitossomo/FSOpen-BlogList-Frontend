@@ -24,7 +24,7 @@ const create = async (newObject) => {
 }
 
 const like = async (blog) => {
-  const response = await axios.post(`${baseUrl}/like/${blog.id}`)
+  const response = await axios.post(`/${baseUrl}/${blog.id}/like`)
   return response.data
 }
 
@@ -37,5 +37,10 @@ const remove = async (blog) => {
   return response.data
 }
 
-const blogService = { setToken, getAll, create, like, remove }
+const comment = async (blog, comment) => {
+  const response = await axios.post(`/${baseUrl}/${blog.id}/comment`, comment)
+  return response.data
+}
+
+const blogService = { setToken, getAll, create, like, remove, comment }
 export default blogService
