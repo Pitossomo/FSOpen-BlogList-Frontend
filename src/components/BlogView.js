@@ -1,3 +1,4 @@
+import { Button, Input, List, ListItem } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { commentBlog, removeBlog } from '../reducers/blogReducer'
@@ -25,8 +26,6 @@ const BlogView = () => {
 
   if (!blog) return null
 
-  console.log(blog)
-
   return (
     <div className='blogCard'>
       <h2 className='mainInfo'>
@@ -40,23 +39,23 @@ const BlogView = () => {
         </p>
         <p className='creatorName'>added by {blog.user.name}</p>
         {user && user.username === blog.user.username ? (
-          <button className='deleteBtn' onClick={handleDelete}>
+          <Button className='deleteBtn' onClick={handleDelete}>
             delete
-          </button>
+          </Button>
         ) : null}
       </div>
       <div>
         <h3>Comments</h3>
         <form onSubmit={handleNewComment}>
-          <input name='newComment' type='text' />
-          <button type='submit'>add comment</button>
+          <Input name='newComment' type='text' />
+          <Button type='submit'>add comment</Button>
         </form>
         {blog.comments ? (
-          <ul>
+          <List>
             {blog.comments.map((c, i) => (
-              <li key={`com${i}`}>{c}</li>
+              <ListItem key={`com${i}`}>{c}</ListItem>
             ))}
-          </ul>
+          </List>
         ) : null}
       </div>
     </div>

@@ -69,10 +69,8 @@ export const createNewBlog = (newBlog) => {
       dispatch(
         createNewAlert(`New blog created: ${blogCreated.title}`, 'success')
       )
-      console.log(blogCreated)
       dispatch(addElement(blogCreated))
     } catch (error) {
-      console.log(error)
       dispatch(
         createNewAlert('Failed to create this blog, please try again.', 'error')
       )

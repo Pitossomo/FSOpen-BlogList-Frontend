@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react'
 import Alerts from './components/Alerts'
 import Blogs from './components/Blogs'
-import LoginForm from './components/LoginForm'
-import BlogForm from './components/BlogForm'
-import Toggable from './components/Toggable'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { initializeBlogs } from './reducers/blogReducer'
 import { initializeAuth } from './reducers/authReducer'
 import { initializeUsers } from './reducers/userReducer'
@@ -16,7 +13,6 @@ import BlogView from './components/BlogView'
 
 const App = () => {
   const dispatch = useDispatch()
-  const loggedUser = useSelector((state) => state.auth)
 
   useEffect(() => {
     dispatch(initializeAuth())
@@ -30,16 +26,7 @@ const App = () => {
 
       <Router>
         <Nav />
-
         <Alerts />
-
-        {loggedUser && loggedUser.username !== null ? (
-          <Toggable buttonLabel='New blog...'>
-            <BlogForm />
-          </Toggable>
-        ) : (
-          <LoginForm />
-        )}
 
         <Routes>
           <Route path='/blogs/:id' element={<BlogView />} />

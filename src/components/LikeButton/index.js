@@ -1,3 +1,4 @@
+import { Button } from '@mui/material'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { likeBlog } from '../../reducers/blogReducer'
@@ -10,9 +11,9 @@ const LikeButton = ({ blog }) => {
   }
 
   return (
-    <button className='likeBtn' onClick={handleLike}>
+    <Button className='likeBtn' onClick={handleLike}>
       like
-    </button>
+    </Button>
   )
 }
 
