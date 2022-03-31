@@ -25,6 +25,8 @@ const BlogView = () => {
 
   if (!blog) return null
 
+  console.log(blog)
+
   return (
     <div className='blogCard'>
       <h2 className='mainInfo'>

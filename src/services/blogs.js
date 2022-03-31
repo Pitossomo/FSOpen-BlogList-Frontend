@@ -24,7 +24,7 @@ const create = async (newObject) => {
 }
 
 const like = async (blog) => {
-  const response = await axios.post(`/${baseUrl}/${blog.id}/like`)
+  const response = await axios.post(`${baseUrl}/${blog.id}/like`)
   return response.data
 }
 
@@ -37,8 +37,10 @@ const remove = async (blog) => {
   return response.data
 }
 
-const comment = async (blog, comment) => {
-  const response = await axios.post(`/${baseUrl}/${blog.id}/comment`, comment)
+const comment = async (blog, text) => {
+  const response = await axios.post(`${baseUrl}/${blog.id}/comment`, {
+    comment: text,
+  })
   return response.data
 }
 

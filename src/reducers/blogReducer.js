@@ -113,7 +113,8 @@ export const removeBlog = (blog) => {
 
 export const commentBlog = (blog, comment) => {
   return async (dispatch) => {
-    const newBlog = { ...blog, comment: blog.comments.concat(comment) }
+    console.log(comment)
+    const newBlog = { ...blog, comments: blog.comments.concat(comment) }
     dispatch(updateElement(newBlog))
     try {
       await blogService.comment(blog, comment)
