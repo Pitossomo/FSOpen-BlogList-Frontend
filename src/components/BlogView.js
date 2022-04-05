@@ -1,4 +1,13 @@
-import { Button, Input, List, ListItem } from '@mui/material'
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Input,
+  List,
+  ListItem,
+  Typography,
+} from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { commentBlog, removeBlog } from '../reducers/blogReducer'
@@ -27,38 +36,44 @@ const BlogView = () => {
   if (!blog) return null
 
   return (
-    <div className='blogCard'>
-      <h2 className='mainInfo'>
-        {blog.title}, <i>{blog.author} </i>
-      </h2>
-      <div>
-        <p className='url'>{blog.url}</p>
-        <p className='likes'>
-          Likes: {blog.likes}
-          <LikeButton blog={blog} />
-        </p>
-        <p className='creatorName'>added by {blog.user.name}</p>
-        {user && user.username === blog.user.username ? (
-          <Button className='deleteBtn' onClick={handleDelete}>
-            delete
-          </Button>
-        ) : null}
-      </div>
-      <div>
-        <h3>Comments</h3>
-        <form onSubmit={handleNewComment}>
-          <Input name='newComment' type='text' />
-          <Button type='submit'>add comment</Button>
-        </form>
-        {blog.comments ? (
-          <List>
-            {blog.comments.map((c, i) => (
-              <ListItem key={`com${i}`}>{c}</ListItem>
-            ))}
-          </List>
-        ) : null}
-      </div>
-    </div>
+    <Card className='blogCard'>
+      <CardContent>
+        <Typography variant='h3' className='mainInfo'>
+          {blog.title}, <i>{blog.author} </i>
+        </Typography>
+        <div>
+          <Typography variant='body1' className='url'>
+            {blog.url}
+          </Typography>
+          <Typography variant='body1' className='likes'>
+            Likes: {blog.likes}
+            <LikeButton blog={blog} />
+          </Typography>
+          <Typography variant='body1' className='creatorName'>
+            added by {blog.user.name}
+          </Typography>
+          {user && user.username === blog.user.username ? (
+            <Button className='deleteBtn' onClick={handleDelete}>
+              delete
+            </Button>
+          ) : null}
+        </div>
+        <div>
+          <Typography variant='h3'>Comments</Typography>
+          <form onSubmit={handleNewComment}>
+            <Input name='newComment' type='text' />
+            <Button type='submit'>add comment</Button>
+          </form>
+          {blog.comments ? (
+            <List>
+              {blog.comments.map((c, i) => (
+                <ListItem key={`com${i}`}>{c}</ListItem>
+              ))}
+            </List>
+          ) : null}
+        </div>
+      </CardContent>
+    </Card>
   )
 }
 

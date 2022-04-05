@@ -1,3 +1,4 @@
+import { Box, Container, List, ListItem } from '@mui/material'
 import React from 'react'
 import { useSelector } from 'react-redux'
 
@@ -23,11 +24,13 @@ const Alerts = () => {
 
   if (alerts.messages.length > 0)
     return (
-      <ul id='alerts' style={style}>
-        {alerts.messages.map((alert, i) => (
-          <li key={`alert${i}`}>{alert}</li>
-        ))}
-      </ul>
+      <Container>
+        <List style={style} id='alerts'>
+          {alerts.messages.map((alert, i) => (
+            <ListItem key={`alert${i}`}>{alert}</ListItem>
+          ))}
+        </List>
+      </Container>
     )
   else return null
 }

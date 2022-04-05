@@ -1,5 +1,7 @@
+import { Button, Typography } from '@mui/material'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { logout } from '../reducers/authReducer'
 
 const Greetings = () => {
@@ -12,15 +14,24 @@ const Greetings = () => {
 
   if (user && user.username !== null)
     return (
-      <span>
-        Hello, {user.username}
-        <button onClick={handleLogout}>
-          <small>Logout</small>
-        </button>
-      </span>
+      <>
+        <Typography variant='body2'>Hello, {user.username}</Typography>
+        <Button
+          variant='outlined'
+          color='secondary'
+          size='small'
+          onClick={handleLogout}
+        >
+          Logout
+        </Button>
+      </>
     )
 
-  return null
+  return (
+    <Button>
+      <Link to='/login'>Log In</Link>
+    </Button>
+  )
 }
 
 export default Greetings

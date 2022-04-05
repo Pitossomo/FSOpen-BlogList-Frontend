@@ -1,3 +1,4 @@
+import { Box } from '@mui/material'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -12,11 +13,11 @@ const Blog = ({ blog }) => {
   }
 
   return (
-    <div className='blogCard' style={blogStyle}>
+    <Box className='blogCard'>
       <Link to={`/blogs/${blog.id}`} className='mainInfo'>
         {blog.title}, <i>{blog.author}</i>
       </Link>
-    </div>
+    </Box>
   )
 }
 

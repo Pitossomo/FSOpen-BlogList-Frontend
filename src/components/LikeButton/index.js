@@ -11,7 +11,12 @@ const LikeButton = ({ blog }) => {
   }
 
   return (
-    <Button className='likeBtn' onClick={handleLike}>
+    <Button
+      variant='contained'
+      size='medium'
+      className='likeBtn'
+      onClick={handleLike}
+    >
       like
     </Button>
   )

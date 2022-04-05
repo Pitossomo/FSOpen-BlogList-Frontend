@@ -1,3 +1,4 @@
+import { createTheme, ThemeProvider } from '@mui/material'
 import { configureStore } from '@reduxjs/toolkit'
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -17,9 +18,37 @@ const store = configureStore({
   },
 })
 
+const theme = createTheme({
+  typography: {
+    h1: {
+      fontSize: '2rem',
+    },
+    h2: {
+      fontSize: '1.5rem',
+    },
+    h3: {
+      fontSize: '1.2rem',
+    },
+    body1: {
+      fontSize: '1.2rem',
+    },
+    body2: {
+      fontSize: '0.7rem',
+    },
+  },
+  Link: {
+    defaultProps: {
+      variant: 'body2',
+    },
+  },
+  spacing: 8,
+})
+
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
   </Provider>,
   document.getElementById('root')
 )

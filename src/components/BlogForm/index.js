@@ -1,4 +1,4 @@
-import { Button, TextField } from '@mui/material'
+import { Box, Button, FormGroup, TextField, Typography } from '@mui/material'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useTextField } from '../../hooks'
@@ -22,23 +22,17 @@ const BlogForm = () => {
   }
 
   return (
-    <div>
-      <h2>Add new blog</h2>
-      <form onSubmit={handleNewBlog}>
-        <div>
-          <TextField {...title} />
-        </div>
-        <div>
-          <TextField {...author} />
-        </div>
-        <div>
-          <TextField {...url} />
-        </div>
-        <Button id='newBlogBtn' type='submit'>
+    <Box>
+      <Typography variant='h2'>Add new blog</Typography>
+      <FormGroup onSubmit={handleNewBlog}>
+        <TextField {...title} />
+        <TextField {...author} />
+        <TextField {...url} />
+        <Button variant='contained' size='medium' id='newBlogBtn' type='submit'>
           Add
         </Button>
-      </form>
-    </div>
+      </FormGroup>
+    </Box>
   )
 }
 

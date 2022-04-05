@@ -10,6 +10,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Nav from './components/Nav'
 import UserView from './components/UserView'
 import BlogView from './components/BlogView'
+import { Container } from '@mui/material'
+import LoginForm from './components/LoginForm'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -21,21 +23,23 @@ const App = () => {
   }, [dispatch])
 
   return (
-    <div>
-      <h1>Blogs</h1>
+    <Router>
+      <Nav />
+      <div>
+        <Container>
+          <Alerts />
 
-      <Router>
-        <Nav />
-        <Alerts />
-
-        <Routes>
-          <Route path='/blogs/:id' element={<BlogView />} />
-          <Route path='/users/:id' element={<UserView />} />
-          <Route path='/users' element={<Users />} />
-          <Route path='/blogs' element={<Blogs />} />
-        </Routes>
-      </Router>
-    </div>
+          <Routes>
+            <Route path='/' element={<Blogs />} />
+            <Route path='/login' element={<LoginForm />} />
+            <Route path='/blogs/:id' element={<BlogView />} />
+            <Route path='/users/:id' element={<UserView />} />
+            <Route path='/users' element={<Users />} />
+            <Route path='/blogs' element={<Blogs />} />
+          </Routes>
+        </Container>
+      </div>
+    </Router>
   )
 }
 

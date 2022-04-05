@@ -1,3 +1,4 @@
+import { Box, List, ListItem, Typography } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
@@ -9,15 +10,15 @@ const UserView = () => {
   if (!user) return null
 
   return (
-    <div>
-      <h2>{user.name}</h2>
-      <h3>added blogs</h3>
-      <ul>
+    <Box>
+      <Typography variant='h2'>{user.name}</Typography>
+      <Typography variant='h3'>added blogs</Typography>
+      <List>
         {user.blogs.map((u) => (
-          <li key={`b${u.id}`}>{u.title}</li>
+          <ListItem key={`b${u.id}`}>{u.title}</ListItem>
         ))}
-      </ul>
-    </div>
+      </List>
+    </Box>
   )
 }
 

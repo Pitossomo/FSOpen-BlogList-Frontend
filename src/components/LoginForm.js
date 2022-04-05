@@ -1,3 +1,4 @@
+import { Card, Container } from '@mui/material'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { login } from '../reducers/authReducer'
@@ -14,7 +15,7 @@ const LoginForm = () => {
   }
 
   return (
-    <div>
+    <Card>
       <h2>Log in to application</h2>
       <form id='loginForm' onSubmit={handleLogin}>
         <div>
@@ -43,7 +44,7 @@ const LoginForm = () => {
           Login
         </button>
       </form>
-    </div>
+    </Card>
   )
 }
 
